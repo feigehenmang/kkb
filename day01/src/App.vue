@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>{{$store.state.count}}</h1>
-    <!-- <h2>{{$store.getters.doubleCount}}</h2> -->
+    <h2>{{$store.getters.doubleCount}}</h2>
     <span @click="$store.commit('add', 2)">commit</span>
     <span @click="$store.dispatch('add')">dispatch</span>
     <div id="nav">

@@ -1,26 +1,31 @@
 let Vue;
-/**
- * example:
- * 
- */
 class Store {
     constructor(options) {
         this.options = options;
-        console.log(this.options.state)
+        console.log(this.options.state);
         this._state = new Vue({
             data() {
                 return {
                     state: options.state || {}
                 }
+            },
+            computed: {
+                ...this.options.getters
             }
         })
         console.log(this._state.state);
+        // this.$store.getters.dobuleCount
+        
     }
 
     
-    // get getters() {
-    //     return this._getters.getters;
-    // }
+    get getters() {
+        let getters = {};
+        for (const key in this.options.getters) {
+            getters[key] = this._state[key];
+        }
+        return getters;
+    }
     get state() {
         // console.log(this)
         return this._state.state;
