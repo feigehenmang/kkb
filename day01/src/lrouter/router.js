@@ -16,7 +16,7 @@ class Router {
         // console.log(_Vue); // Vue 构造函数
         _Vue.mixin({
             beforeCreate() {
-                console.log(this)
+                // console.log(this)
                 if (this.$options.router) {
                     _Vue.prototype.$router = this.$options.router;
                 }
@@ -26,7 +26,8 @@ class Router {
             // 当currPath变化重新执行render函数
             render(h) {
                 const routes = this.$router.options.routes;
-                const {component} = routes.find(route => route.path === this.$router.currPath);
+                const route = routes.find(route => route.path === this.$router.currPath);
+                const component = route ? route.component : null;
                 // console.log(component)
                 return h(component, {});
             }

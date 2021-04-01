@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <h1>{{$store.state.count}}</h1>
-    <span @click="$store.commit('add')">commit</span>
+    <!-- <h2>{{$store.getters.doubleCount}}</h2> -->
+    <span @click="$store.commit('add', 2)">commit</span>
     <span @click="$store.dispatch('add')">dispatch</span>
     <div id="nav">
       <router-link to="/">Home</router-link> |
@@ -10,7 +11,13 @@
     <router-view/>
   </div>
 </template>
-
+<script>
+export default {
+  beforeCreate() {
+    console.log(this.$store)
+  }
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
