@@ -15,6 +15,8 @@ class Store {
             }
         })
         console.log(this._state.state);
+        // this.$store.getters.dobuleCount
+        
     }
 
     
