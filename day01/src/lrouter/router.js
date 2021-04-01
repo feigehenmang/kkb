@@ -16,6 +16,7 @@ class Router {
         // console.log(_Vue); // Vue 构造函数
         _Vue.mixin({
             beforeCreate() {
+                console.log(this)
                 if (this.$options.router) {
                     _Vue.prototype.$router = this.$options.router;
                 }
@@ -26,7 +27,7 @@ class Router {
             render(h) {
                 const routes = this.$router.options.routes;
                 const {component} = routes.find(route => route.path === this.$router.currPath);
-                console.log(component)
+                // console.log(component)
                 return h(component, {});
             }
         })
