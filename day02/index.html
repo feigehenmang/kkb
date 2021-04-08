@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div>{{counter}}</div>
+        <div v-text="counter"></div>
+        <div v-html="desc"></div>
+        <button on:click="add">add</button>
+        <input type="text" v-value="counter" on:change="handleChange">
+        <input type="text" v-model="counter">
+    </div>
+    <script src="./mini-vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                counter: 1,
+                desc: '<span style="color:red;">1</span>'
+            },
+            methods: {
+                add() {
+                    this.counter++;
+                },
+                handleChange(event) {
+                    this.counter = event.target.value;
+                }
+            },
+        });
+        // setInterval(() => {
+        //     vm.counter++;
+        // },1000)
+    </script>
+</body>
+</html>
