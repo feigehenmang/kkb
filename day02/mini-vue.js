@@ -1,6 +1,7 @@
 function defineReactive(obj, key, val) {
     const dep = new Dep();
-    observer(val);
+    observer(val); // 当val是对象时进行劫持
+    // 遍历单个节点进行劫持
     Object.defineProperty(obj, key, {
         get() {
             // 闭包中将val 缓存
@@ -10,6 +11,7 @@ function defineReactive(obj, key, val) {
         },
         set(newVal) {
             if(newVal !== val) {
+                // 当newVal为对象时对newVal进行劫持
                 observer(newVal);
                 // console.log('setter', val);
                 val = newVal;
@@ -18,6 +20,7 @@ function defineReactive(obj, key, val) {
         }
     })
 }
+// 对对象每个节点进行便利劫持
 function observer(obj) {
     if(typeof obj !== 'object' || obj == null) {
         return;
