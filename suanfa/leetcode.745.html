@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         var WordFilter = function (words) {
+      this.trie = {}, idx = 0;
+      for (let word of words) {
+        let m = word.length;
+        let paths = [];
+        for (let i = 0; i <= m; i++) {
+          this.buildTrie(word.substr(m - i, m) + '_' + word, idx);
+        }
+        idx++
+      }
+      console.log(this.trie)
+    };
+
+
+    WordFilter.prototype.buildTrie = function (str, weight) {
+      console.log(str)
+      let trie = this.trie;
+      let flag = false;
+      for (let path of str) {
+        if (!trie[path]) {
+          trie[path] = {}
+        }
+        if (path === '_') flag = true;
+        trie = trie[path];
+        trie.weight = flag ? weight : trie.weight;
+      }
+    }
+
+    /** 
+     * @param {string} prefix 
+     * @param {string} suffix
+     * @return {number}
+     */
+    WordFilter.prototype.f = function (prefix, suffix) {
+      let paths = suffix + '_' + prefix;
+      let trie = this.trie;
+      for (let path of paths) {
+        if (!trie[path]) return -1;
+        trie = trie[path];
+      }
+      return trie.weight;
+    };
+
+
+    var trie = new WordFilter(['apple']);
+    console.log(trie.f("a", "e"))// returns 0
+    console.log(trie.f("b", ""))
+    console.log(trie.f("ap", "le"))
+    </script>
+</body>
+</html>
