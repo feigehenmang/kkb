@@ -1,18 +1,16 @@
 import Vue from "vue";
-const callbacks = [];
-document.addEventListener('scroll', () => {
-    callbacks.forEach(callback => callback())
-})
+const items = [];
+
 Vue.directive('load', {
     bind(el, binding) {
-        console.log(el, binding);
-        
-        callbacks.push(() => {
-            const {top} = el.getBoundingClientRect();
-            console.log(top)
-            if(top < window.innerHeight) {
-                el.setAttribute('src', binding.value);
-            }
+        console.log(el.getBoundingClientRect().top, binding, items);
+        const imageSrc = binding.value;
+        items.push({
+            el,
+            imageSrc
         })
+        if(el.getBoundingClientRect().top < window.innerHeight) {
+            el.setAttribute('src', imageSrc)
+        }
     }
 })
