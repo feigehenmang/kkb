@@ -1,7 +1,7 @@
 <template>
   <div>
       <div v-for="image in imageList" :key="image">
-          <img v-load='image' style="width: 100%;" alt="">
+          <img v-load='image' src="../assets/logo.png" style="width: 100%;" alt="">
       </div>
   </div>
 </template>
