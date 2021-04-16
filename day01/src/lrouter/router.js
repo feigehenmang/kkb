@@ -26,7 +26,7 @@ class Router {
             // 当currPath变化重新执行render函数
             render(h) {
                 const routes = this.$router.options.routes;
-                const route = routes.find(route => route.path === this.$router.currPath);
+                const route = routes.find(route =>( route.path === this.$router.currPath || route.path + '/' === this.$router.currPath) );
                 const component = route ? route.component : null;
                 // console.log(component)
                 return h(component, {});

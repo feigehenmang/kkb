@@ -21,7 +21,7 @@ export default new Vuex.Store({
   },
   getters: {
     doubleCount() {
-      console.log(this);
+      // console.log(this);
       return this.state.count*2;
     }
   },

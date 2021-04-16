@@ -14,7 +14,6 @@
 <script>
 export default {
   beforeCreate() {
-    console.log(this.$store)
   }
 }
 </script>

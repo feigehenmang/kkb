@@ -2,7 +2,7 @@ let Vue;
 class Store {
     constructor(options) {
         this.options = options;
-        console.log(this.options.state);
+        // console.log(this.options.state);
         this._state = new Vue({
             data() {
                 return {
@@ -13,7 +13,7 @@ class Store {
                 ...this.options.getters
             }
         })
-        console.log(this._state.state);
+        // console.log(this._state.state);
         // this.$store.getters.dobuleCount
         
     }
