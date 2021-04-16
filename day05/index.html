@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div>{{counter}}</div>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                counter: 1
+            },
+            render(h) {
+                // const div = document.createElement('div');
+                // div.id = 'app';
+                // div.textContent = this.counter;
+                // return div;
+                return h('div', {id: 'app'}, [
+                    h('p', null, this.counter + ''),
+                    h('p', null, this.counter + ''),
+                    h('p', null, this.counter + '')
+                ])
+            }
+        });
+        setInterval(() => {
+            vm.counter++;
+        },1000)
+    </script>
+</body>
+</html>
