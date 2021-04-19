@@ -4,7 +4,7 @@
         <!-- {{column}} -->
         <table>
             <tr>
-                <th v-for="col in column" :key="col.id" style="cursor:pointer;" @click="startSort(col)">{{col.caption}}<span>{{col.desc === false ? '降序' : col.desc ? '升序' : ''}}</span></th>
+                <th v-for="col in column" :key="col.id" style="cursor:pointer;"><div  @click="startSort(col)">{{col.caption}}<span>{{col.desc?'升序':'降序'}}</span></div></th>
             </tr>
             <tr v-for="item in dataSource" :key="item.id">
                 <td v-for="col in column" :key="col.id">
@@ -38,19 +38,25 @@ import emmiter from '../mixins/emmiter';
         },
         methods: {
             startSort(columnData) {
-                console.log(columnData);
-                columnData.desc ? columnData.desc == true ? columnData.desc = false : columnData.desc = false : columnData.desc = true
+                columnData.desc = !columnData.desc
+                this.dataSource.sort((a, b) => {
+                    if(columnData.desc) {
+                        return a[columnData.dataField] - b[columnData.dataField]
+                    } else {
+                        return b[columnData.dataField] - a[columnData.dataField]
+                    }
+                })
             }
         },
         created() {
             let id = 0;
             this.$on('table.column.add', (ev) => {
-                console.log(ev.template);
                 this.column.push({
                     dataField: ev.displayExpr,
                     caption: ev.caption,
                     id: ++id,
-                    beforeTemplate: ev.template ? ev.template : null
+                    beforeTemplate: ev.template ? ev.template : null,
+                    desc: false
                 })
             });
             this.$on('table.column.remove', (ev) => {
