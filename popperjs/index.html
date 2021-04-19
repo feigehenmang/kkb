@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/_@popperjs_core@2.9.2@@popperjs/core/dist/umd/popper.js"></script>
+    <style>
+        #tooltip {
+            background-color: #333;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="button" aria-describedby="tooltip">I'm a button</button>
+    <div id="tooltip" role="tooltip">I'm a tooltip</div>
+    <script>
+        const button = document.querySelector('#button');
+        const tooltip = document.querySelector('#tooltip');
+
+        // Pass the button, the tooltip, and some options, and Popper will do the
+        // magic positioning for you:
+        Popper.createPopper(button, tooltip, {
+            placement: 'left',
+        });
+    </script>
+</body>
+
+</html>
