@@ -1,14 +1,16 @@
 <template>
   <div id="app">
     <k-table :dataSource="dataSource">
-      <k-column name="column" caption="姓名" displayExpr="name"></k-column>
-      <k-column name="column" caption="地址" displayExpr="address"></k-column>
-      <k-column name="column" caption="年龄" displayExpr="age"></k-column>
-      <k-column name="column" caption="时间" displayExpr="date">
-        <template name="content" v-slot="item">
-          {{item.value}}
-        </template>
+      <k-column caption="姓名" displayExpr="name"></k-column>
+      <k-column caption="地址" displayExpr="address"></k-column>
+      <k-column caption="年龄" displayExpr="age"></k-column>
+      <k-column caption="时间" template="date" displayExpr="date">
       </k-column>
+      <template v-slot:date="slotProps">
+        <div>
+          {{slotProps.value.toLocaleString()}}
+        </div>
+      </template>
     </k-table>
   </div>
 </template>

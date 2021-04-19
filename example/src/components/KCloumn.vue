@@ -1,6 +1,5 @@
 <template>
     <div>
-        <slot></slot>
     </div>
 </template>
 
@@ -17,7 +16,8 @@ import emmiter from '../mixins/emmiter'
             caption: {
                 type: String,
                 required: true
-            }
+            },
+            template: String
             // valueExpr: {
             //     required: true,
             //     type: string
