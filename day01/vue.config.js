@@ -1,4 +1,6 @@
 const path = require('path');
+console.log(process.env.VUE_APP_ISC_URL)
+console.log(process.env.test)
 module.exports = {
     publicPath: '/test/',
     chainWebpack(config) {
