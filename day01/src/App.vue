@@ -1,18 +1,22 @@
 <template>
   <div id="app">
+    <img src="./assets/logo.png" alt="">
     <h1>{{$store.state.count}}</h1>
     <h2>{{$store.getters.doubleCount}}</h2>
     <span @click="$store.commit('add', 2)">commit</span>
     <span @click="$store.dispatch('add')">dispatch</span>
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/"><icon name="add" />Home</router-link> |
+      <router-link to="/about"><icon name="delete" />About</router-link>
     </div>
     <router-view/>
   </div>
 </template>
 <script>
 export default {
+  data() {
+    return {}
+  },
   beforeCreate() {
   }
 }

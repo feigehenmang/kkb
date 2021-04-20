@@ -5,6 +5,9 @@ import store from './lstore'
 import './plugins/element.js'
 import axios from 'axios';
 import './directives/load'
+import { installIcon } from './utils/icon'
+import './utils/component'
+installIcon();
 Vue.config.productionTip = false
 Vue.prototype.$http = axios;
 new Vue({
