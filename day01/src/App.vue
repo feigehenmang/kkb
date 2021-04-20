@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png" alt="">
     <h1>{{$store.state.count}}</h1>
     <h2>{{$store.getters.doubleCount}}</h2>
     <span @click="$store.commit('add', 2)">commit</span>
@@ -18,7 +17,7 @@ export default {
     return {}
   },
   beforeCreate() {
-    console.log(process.env)
+    // console.log(process.env)
   }
 }
 </script>
