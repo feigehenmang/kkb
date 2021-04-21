@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="../dist/vue.global.js"></script> -->
+</head>
+<body>
+    <div id="app">{{title}}</div>
+    <script>
+        const createAppAPI = (render) => {
+            return function(data) {
+                return {
+                    mount(el) {
+                        console.log(el);
+                        const dataRender = data.render;
+                        const vdom = dataRender.call(data.data())
+                        render.call(null, vdom, el);
+                        
+                    }
+                }
+            }
+        }
+        const createRender = (nodeOps) => {
+            console.log(nodeOps);
+            // vdom => dom
+            const render = (vdom, container) => {
+                // console.log(nodeOps.querySelector(container))
+                const dom = nodeOps.createElement(vdom.tag);
+                nodeOps.setElementText(dom, vdom.children);
+                nodeOps.insert(nodeOps.querySelector(container), dom);
+            };
+            return {
+                render,
+                createApp: createAppAPI(render)
+            }
+        }
+        const Vue = {
+            createApp(options) {
+                return app = createRender({
+                    createElement(tag) {
+                        return document.createElement(tag);
+                    },
+                    insert(parent, child) {
+                        parent.appendChild(child);
+                    },
+                    querySelector(el) {
+                        return document.querySelector(el);
+                    },
+                    setElementText(el, text) {
+                        el.textContent = text;
+                    }
+                }).createApp(options);
+            }
+        }
+    </script>
+    <script>
+        const {createApp} = Vue;
+        createApp({
+            data() {
+                return {
+                    title: 'Hello Vue3'
+                }
+            },
+            render() {
+                return {
+                    tag: 'h2',
+                    children: this.title
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
