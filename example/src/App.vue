@@ -1,5 +1,6 @@
 <template>
-  <div id="app">
+  <div @click="start" id="app">
+    <!-- <loading ref="loading" v-model="show"></loading> -->
     <k-table :dataSource="dataSource">
       <k-column caption="姓名" displayExpr="name"></k-column>
       <k-column caption="地址" displayExpr="address"></k-column>
@@ -18,11 +19,12 @@
 <script>
 import KTable from '@/components/KTable.vue';
 import KColumn from '@/components/KCloumn.vue';
+
 export default {
   name: 'App',
   components: {
     KTable,
-    KColumn
+    KColumn,
   },
   data() {
     return {
@@ -32,9 +34,21 @@ export default {
         {id: 2, name: '王小虎3', address: '北京市西城区富卓大厦', age: 20, date: new Date()},
         {id: 3, name: '王小虎4', address: '北京市西城区富卓大厦', age: 21, date: new Date()},
         {id: 4, name: '王小虎5', address: '北京市西城区富卓大厦', age: 22, date: new Date()}
-      ]
+      ],
+      show: true
     }
   },
+  mounted() {
+
+  },
+  methods: {
+    start() {
+      this.$loading.show();
+      setTimeout(() => {
+        this.$loading.hide();
+      }, 3000)
+    }
+  }
 }
 </script>
 
