@@ -21,7 +21,8 @@ export default {
   },
   methods: {
     clear() {
-      console.log('cach', this.include)
+      // console.log('cach', this.include);
+      this.include.includes('Home') && this.include.splice(this.include.indexOf('Home'), 1)
     }
   },
   watch: {
