@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import ActiveComponent from '../views/ActiveComponent.vue'
 
 Vue.use(VueRouter)
 
@@ -12,6 +13,15 @@ const routes = [
     meta: {
       keepAlive: true,
       deepth: 1 // 层级
+    }
+  },
+  {
+    path: '/active-component',
+    name: 'ActiveComponent',
+    component: ActiveComponent,
+    meta: {
+      keepAlive: true,
+      deepth: 0.5
     }
   },
   {
