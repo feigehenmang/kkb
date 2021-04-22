@@ -5,6 +5,7 @@
       <button @click="formData.count++">add</button>
       <button @click="formData.count--">inc</button>
     </div>
+    <button @click="jump">Click</button>
     <input type="text" v-model="formData.name">
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
@@ -20,6 +21,12 @@ export default {
   components: {
     // HelloWorld
   },
+  methods: {
+    jump() {
+      console.log(this.$router)
+      this.$router.replace('/about/123')
+    }
+  },
   data() {
     return {
       formData: {
@@ -28,13 +35,10 @@ export default {
       }
     }
   },
-  // activated() {
-  //   console.log('activated');
-  //   // console.log(this.$vnode.parent.componentInstance)
-  // },
-  // deactivated() {
-  //   console.log(this.$vnode.parent.componentInstance)
-  //   console.log('deactivated');
-  // }
+  activated() {
+    // console.log(this.$vnode.data, this.$vnode.componentOptions.Ctor.cid, this.$vnode.parent.componentInstance.keys, this.$vnode.parent.componentInstance.cache)
+  },
+  deactivated() {
+  }
 }
 </script>

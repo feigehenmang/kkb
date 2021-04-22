@@ -16,6 +16,9 @@ export default {
   components: {
     Home
     // Home
+  },
+  mounted() {
+    console.log(this.$vnode)
   }
 }
 </script>
