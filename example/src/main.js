@@ -3,6 +3,7 @@ import App from './App.vue'
 import './assets/iconfont.css'
 import create from './utils/create'
 import Loading from './components/Loading'
+import router from './router'
 Vue.config.productionTip = false
 Vue.prototype.$loading = (() => {
   const vm = create(Loading);
@@ -14,5 +15,6 @@ Vue.prototype.$loading = (() => {
   return vm;
 })()
 new Vue({
-  render: h => h(App),
+  router,
+  render: h => h(App)
 }).$mount('#app')

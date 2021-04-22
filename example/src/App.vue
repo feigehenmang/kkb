@@ -1,64 +1,79 @@
 <template>
-  <div @click="start" id="app">
-    <!-- <loading ref="loading" v-model="show"></loading> -->
-    <k-table :dataSource="dataSource">
-      <k-column caption="姓名" displayExpr="name"></k-column>
-      <k-column caption="地址" displayExpr="address"></k-column>
-      <k-column caption="年龄" displayExpr="age"></k-column>
-      <k-column caption="时间" template="date" displayExpr="date">
-      </k-column>
-      <template v-slot:date="slotProps">
-        <div>
-          {{slotProps.value.toLocaleString()}}
-        </div>
-      </template>
-    </k-table>
+  <div id="app">
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>
+    <button @click="clear()">Clear</button>
+    {{$route.meta}}
+    <keep-alive :include="include">
+      <router-view v-if="$route.meta.keepAlive" />
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
   </div>
 </template>
-
 <script>
-import KTable from '@/components/KTable.vue';
-import KColumn from '@/components/KCloumn.vue';
-
 export default {
-  name: 'App',
-  components: {
-    KTable,
-    KColumn,
-  },
   data() {
     return {
-      dataSource: [
-        {id: 0, name: '王小虎1', address: '北京市西城区富卓大厦', age: 18, date: new Date()},
-        {id: 1, name: '王小虎2', address: '北京市西城区富卓大厦', age: 19, date: new Date()},
-        {id: 2, name: '王小虎3', address: '北京市西城区富卓大厦', age: 20, date: new Date()},
-        {id: 3, name: '王小虎4', address: '北京市西城区富卓大厦', age: 21, date: new Date()},
-        {id: 4, name: '王小虎5', address: '北京市西城区富卓大厦', age: 22, date: new Date()}
-      ],
-      show: true
+      include: []
     }
   },
-  mounted() {
-
-  },
   methods: {
-    start() {
-      this.$loading.show();
-      setTimeout(() => {
-        this.$loading.hide();
-      }, 3000)
+    clear() {
+      console.log('cach', this.include)
+    }
+  },
+  watch: {
+    $route: {
+      immediate: true,
+      handler(to, from) {
+  
+        // 当to.meta.deepth > from.meta.deepth 时，为前进操作，不需要缓存
+        // 当to.meth.deepth < from.meta.deepth 时，为后退操作需要缓存
+        // console.log(to.name, from.name)
+  
+        // home => about no
+        // about => home yes
+        if(to.meta.keepAlive) {
+          !this.include.includes(to.name) && this.include.push(to.name)
+        }
+        if(from && from.meta && from.meta.keepAlive) {
+          !this.include.includes(from.name) && this.include.push(from.name)
+        }
+        // console.log(this.include);
+        // console.log(to, from)
+        // console.log(this.include)
+        // to > from 前进  to < from 后退
+        const toDeepth = to.meta.deepth, fromDeepth = ((from || {}).meta || {}).deepth || toDeepth+1;
+        if(to.meta.keepAlive && toDeepth > fromDeepth) {
+          this.include.includes(to.name) && this.include.splice(this.include.indexOf(to.name), 1);
+        }
+  
+      }
     }
   }
 }
 </script>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+  }
+
+  #nav {
+    padding: 30px;
+  }
+
+  #nav a {
+    font-weight: bold;
+    color: #2c3e50;
+  }
+
+  #nav a.router-link-exact-active {
+    color: #42b983;
+  }
 </style>
