@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import ActiveComponent from '../views/ActiveComponent.vue'
-
+import Temp from '../components/Temp'
 Vue.use(VueRouter)
 
 const routes = [
@@ -47,6 +47,11 @@ const routes = [
       keepAlive: true,
       deepth: 2
     }
+  },
+  {
+    path: '/temp',
+    name: 'Temp',
+    component: Temp
   }
 ]
 

@@ -4,8 +4,10 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
+    <custom-title :title.sync="title" @target="handleClick">
+      <span>Title</span>
+    </custom-title>
     <button @click="clear('Home')">Clear</button>
-    {{$route.meta}}
     <keep-alive :include="include">
       <router-view v-if="$route.meta.keepAlive" />
     </keep-alive>
@@ -13,13 +15,21 @@
   </div>
 </template>
 <script>
+import CustomTitle from './components/study-slot/Title'
 export default {
+  components: {
+    CustomTitle
+  },
   data() {
     return {
-      include: []
+      include: [],
+      title: '123'
     }
   },
   methods: {
+    handleClick() {
+      console.log('handleClick');
+    },
     clear(componentName) {
       // this.$router.push('about')
       this.include.includes(componentName) && this.include.splice(this.include.indexOf(componentName), 1)
