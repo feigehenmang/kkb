@@ -5,6 +5,7 @@ import create from './utils/create'
 import Loading from './components/Loading'
 import router from './router'
 import installAsyncComponent from './utils/installAsync';
+import 'animate.css/animate.css'
 Vue.config.productionTip = false
 Vue.prototype.$loading = (() => {
   const vm = create(Loading);
