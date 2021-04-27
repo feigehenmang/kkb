@@ -4,12 +4,12 @@
         <!-- {{column}} -->
         <table>
             <tr>
-                <th v-for="col in column" :key="col.id" style="cursor:pointer;"><div  @click="startSort(col)">{{col.caption}}<span>{{col.desc?'升序':'降序'}}</span></div></th>
+                <th v-for = "col in column" :key = "col.id" style = "cursor:pointer;"><div  @click = "startSort(col)">{{col.caption}}<span>{{col.desc?'升序':'降序'}}</span></div></th>
             </tr>
-            <tr v-for="item in dataSource" :key="item.id">
-                <td v-for="col in column" :key="col.id">
-                    <template v-if="col.template">
-                        <slot :name="col.template" v-bind="{itemData: item, value: item[col.dataField]}">{{item[col.dataField]}}</slot>
+            <tr       v-for = "item in dataSource" :key = "item.id">
+            <td       v-for = "col in column" :key      = "col.id">
+            <template v-if  = "col.template">
+            <slot     :name = "col.template" v-bind     = "{itemData: item, value: item[col.dataField]}">{{item[col.dataField]}}</slot>
                     </template>
                     <template v-else>
                         {{item[col.dataField]}}
@@ -23,11 +23,11 @@
 <script>
 import emmiter from '../mixins/emmiter';
     export default {
-        name: 'KTable',
+        name  : 'KTable',
         mixins: [emmiter],
-        props: {
+        props : {
             dataSource: {
-                type: Array,
+                type    : Array,
                 required: true
             },
         },
@@ -52,11 +52,11 @@ import emmiter from '../mixins/emmiter';
             let id = 0;
             this.$on('table.column.add', (ev) => {
                 this.column.push({
-                    dataField: ev.displayExpr,
-                    caption: ev.caption,
-                    id: ++id,
-                    beforeTemplate: ev.template ? ev.template : null,
-                    desc: false
+                    dataField     : ev.displayExpr,
+                    caption       : ev.caption,
+                    id            : ++id,
+                    beforeTemplate: ev.template ? ev.template: null,
+                    desc          : false
                 })
             });
             this.$on('table.column.remove', (ev) => {
@@ -79,9 +79,9 @@ import emmiter from '../mixins/emmiter';
 
 <style scoped>
     .icon {
-        font-size: 1em;
-        display: inline-block;
-        margin: 0 5px;
+        font-size  : 1em;
+        display    : inline-block;
+        margin     : 0 5px;
         font-weight: 100;
     }
 </style>

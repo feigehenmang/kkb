@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import List from '../views/List.vue'
 import ActiveComponent from '../views/ActiveComponent.vue'
 import Temp from '../components/Temp'
 Vue.use(VueRouter)
@@ -52,6 +53,11 @@ const routes = [
     path: '/temp',
     name: 'Temp',
     component: Temp
+  },
+  {
+    path: '/list',
+    name: 'List',
+    component: List
   }
 ]
 

@@ -6,15 +6,15 @@
 <script>
 import emmiter from '../mixins/emmiter'
     export default {
-        name: 'KCloumn',
+        name  : 'KCloumn',
         mixins: [emmiter],
-        props: {
+        props : {
             displayExpr: {
-                type: String,
+                type    : String,
                 required: true
             },
             caption: {
-                type: String,
+                type    : String,
                 required: true
             },
             template: String
@@ -32,6 +32,6 @@ import emmiter from '../mixins/emmiter'
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang = "scss" scoped>
 
 </style>

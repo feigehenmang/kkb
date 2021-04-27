@@ -4,10 +4,14 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <custom-title :title.sync="title" @target="handleClick">
+    <async></async>
+    <!-- <custom-title :title.sync="title" @target="handleClick">
       <span>Title</span>
+      <template #header="slotProps">{{slotProps.user}}Header</template>
     </custom-title>
-    <button @click="clear('Home')">Clear</button>
+    <custom-title :title.sync="title" @target="handleClick">
+    </custom-title>
+    <button @click="clear('Home')">Clear</button> -->
     <keep-alive :include="include">
       <router-view v-if="$route.meta.keepAlive" />
     </keep-alive>
@@ -15,15 +19,15 @@
   </div>
 </template>
 <script>
-import CustomTitle from './components/study-slot/Title'
+// import CustomTitle from './components/study-slot/Title'
 export default {
   components: {
-    CustomTitle
+    // CustomTitle
   },
   data() {
     return {
       include: [],
-      title: '123'
+      title  : '123'
     }
   },
   methods: {

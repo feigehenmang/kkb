@@ -4,7 +4,9 @@
           currComponent
       </h3>
       <span class="item" v-for="comp in components" :key="comp" @click="currComponent=comp">{{comp}}</span>
-      <component :is='currComponent'></component>
+      <keep-alive>
+          <component :is='currComponent'></component>
+      </keep-alive>
   </div>
 </template>
 
