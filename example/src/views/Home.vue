@@ -1,20 +1,25 @@
 <template>
   <div class="home">
-    {{formData}}
+    <!-- {{formData}}
     <div>
       <button @click="formData.count++">add</button>
       <button @click="formData.count--">inc</button>
     </div>
     <button @click="jump">Click</button>
-    <input type="text" v-model="formData.name">
+    <input type="text" v-model="formData.name"> -->
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+    <h1>Home</h1>
+    <button @click="$router.push('child1')">Child1</button>
+    <button @click="$router.push('child2')">Child2</button>
+    <!-- <router-link to="/home/child1">Child1</router-link> |
+    <router-link to="/home/child2">Child1</router-link> -->
+
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name      : 'Home',

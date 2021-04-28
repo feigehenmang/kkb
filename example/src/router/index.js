@@ -1,20 +1,45 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import child1Vue from '../views/child1.vue'
+import child2Vue from '../views/child2.vue'
 import List from '../views/List.vue'
 import ActiveComponent from '../views/ActiveComponent.vue'
 import Temp from '../components/Temp'
+
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: 'child1',
+    component: child1Vue
+  },
+  {
+    path: '/home',
     name: 'Home',
     component: Home,
     meta: {
       keepAlive: true,
       deepth: 1 // 层级
-    }
+    },
+    children: [
+      {
+        path: 'child1',
+        component: child1Vue,
+        meta: {
+          keepAlive: true,
+          deepth: 1 // 层级
+        },
+      },
+      {
+        path: 'child2',
+        component: child2Vue,
+        meta: {
+          keepAlive: true,
+          deepth: 1 // 层级
+        },
+      }
+    ]
   },
   {
     path: '/active-component',
@@ -62,7 +87,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })

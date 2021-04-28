@@ -1,11 +1,13 @@
 <template>
   <div id="app">
-    <input type="number" step="20" v-model="number">
-    <p>
+    <!-- <input type="number" step="20" v-model="number"> -->
+    <!-- <p>
       {{showNumber}}
-    </p>
+    </p> -->
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <router-link to="/home">Home</router-link> |
+      <router-link to="/home/child1">Child1</router-link> |
+      <router-link to="/home/child2">Child2</router-link> |
       <router-link to="/about">About</router-link>
     </div>
     <async></async>
