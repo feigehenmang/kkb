@@ -6,6 +6,7 @@ import Loading from './components/Loading'
 import router from './router'
 import installAsyncComponent from './utils/installAsync';
 import 'animate.css/animate.css'
+import store from './store'
 Vue.config.productionTip = false
 Vue.prototype.$loading = (() => {
   const vm = create(Loading);
@@ -20,5 +21,6 @@ Vue.prototype.$loading = (() => {
 installAsyncComponent('Async', 'components/async/Async');
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')

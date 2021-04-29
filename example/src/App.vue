@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <p>{{count}}</p>
+    <p>{{doubleCount}}</p>
+    <p>{{countLocal}}</p>
+    <button @click="$store.dispatch('test/inc')">add</button>
     <!-- <input type="number" step="20" v-model="number"> -->
     <!-- <p>
       {{showNumber}}
@@ -39,6 +43,7 @@
   </div>
 </template>
 <script>
+import { mapGetters, mapState } from 'vuex'
   // import CustomTitle from './components/study-slot/Title'
   export default {
     components: {
@@ -61,10 +66,30 @@
         this.include.includes(componentName) && this.include.splice(this.include.indexOf(componentName), 1)
       }
     },
+    mounted() {
+      console.log(mapState({
+        count: state => state.test.count,
+        
+      }))
+    },
     computed: {
       showNumber() {
         return this.anotherNumber;
-      }
+      },
+      // count() {
+      //   return this.$store.state.test.count
+      // },
+      // doubleCount() {
+      //   return this.$store.getters['test/doubleCount']
+      // },
+      // ...mapState('test', ['count']),
+      ...mapGetters('test', ['doubleCount']),
+      ...mapState({
+        count: state => state.test.count,
+        countLocal(state) {
+          return state.test.count + 2
+        }
+      })
     },
     watch: {
       number(newVal) {
