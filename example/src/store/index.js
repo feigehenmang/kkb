@@ -12,16 +12,19 @@ export default new Vuex.Store({
       },
       getters: {
         doubleCount(state) {
+          // console.log('getter', this);
           return state.count*2
         }
       },
       mutations: {
         inc(state) {
+          console.log('mutation', this);
           state.count++;
         }
       },
       actions: {
         inc(store) {
+          console.log('action', this)
           store.commit('inc');
         }
       }

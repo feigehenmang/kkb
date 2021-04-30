@@ -2,7 +2,7 @@
   <div id="app">
     <p>{{count}}</p>
     <p>{{doubleCount}}</p>
-    <p>{{countLocal}}</p>
+    <!-- <p>{{countLocal}}</p> -->
     <button @click="$store.dispatch('test/inc')">add</button>
     <!-- <input type="number" step="20" v-model="number"> -->
     <!-- <p>
@@ -84,12 +84,13 @@ import { mapGetters, mapState } from 'vuex'
       // },
       // ...mapState('test', ['count']),
       ...mapGetters('test', ['doubleCount']),
-      ...mapState({
-        count: state => state.test.count,
-        countLocal(state) {
-          return state.test.count + 2
-        }
-      })
+      // ...mapState({
+      //   count: state => state.test.count,
+      //   countLocal(state) {
+      //     return state.test.count + 2
+      //   }
+      // })
+      ...mapState('test', ['count'])
     },
     watch: {
       number(newVal) {
