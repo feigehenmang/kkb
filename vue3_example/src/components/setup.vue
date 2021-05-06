@@ -17,6 +17,12 @@ const obj = {
 </template>
  */
 export default {
+    name: 'Setup',
+    data() {
+        return {
+            count: 2
+        }
+    },
     setup() {
         // console.log(context, props)
         const {countFromObj} = toRefs(obj);
