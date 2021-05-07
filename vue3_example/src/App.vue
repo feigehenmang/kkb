@@ -1,5 +1,6 @@
 <template>
   <div>
+    <watch></watch>
     <span style="padding: 10px;" v-for="(master, index) in masters" :key="master" @click="checkMaster(index)">{{master}}</span>
     <p>{{master}}</p>
      <ul>
@@ -22,6 +23,7 @@
 import Setup from './components/setup.vue'
 import lifeCycle from './components/lifeCycle.vue'
 import Provide from './components/Provide.vue'
+import Watch from './components/Watch.vue'
 import { /*onMounted,*/ ref, watchEffect } from 'vue'
 // import HelloWorld from './components/HelloWorld.vue'
 import { getCommits } from './apis/'
@@ -30,7 +32,8 @@ export default {
   components: {
     Setup,
     lifeCycle,
-    Provide
+    Provide,
+    Watch
     // HelloWorld
   },
   setup() {
@@ -44,6 +47,7 @@ export default {
     let cancel;
     watchEffect((onInvalidate) => {
       onInvalidate(() => {
+        console.log('onInvalidate')
         cancel && cancel()
       })
       const p = getCommits(masters[master.value]);
