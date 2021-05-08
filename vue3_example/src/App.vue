@@ -12,28 +12,34 @@
         </li>
       </ul>
   </div>
+  <shallow-readonly></shallow-readonly>
+  <!-- <shallow-reactive></shallow-reactive> -->
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-  <setup ref="setUpEl"></setup>
+  <!-- <setup ref="setUpEl"></setup>
   <life-cycle></life-cycle>
-  <provide></provide>
+  <provide></provide> -->
   <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
 </template>
 
 <script>
-import Setup from './components/setup.vue'
-import lifeCycle from './components/lifeCycle.vue'
-import Provide from './components/Provide.vue'
+// import Setup from './components/setup.vue'
+// import lifeCycle from './components/lifeCycle.vue'
+// import Provide from './components/Provide.vue'
 import Watch from './components/Watch.vue'
-import { /*onMounted,*/ ref, watchEffect } from 'vue'
+import { /*onMounted,isProxy, reactive, readonly,*/  ref, watchEffect } from 'vue'
 // import HelloWorld from './components/HelloWorld.vue'
 import { getCommits } from './apis/'
+import ShallowReadonly from './components/ShallowReadonly.vue'
+// import ShallowReactive from './components/ShallowReactive.vue'
 export default {
   name: 'App',
   components: {
-    Setup,
-    lifeCycle,
-    Provide,
-    Watch
+    // Setup,
+    // lifeCycle,
+    // Provide,
+    Watch,
+    ShallowReadonly,
+    // ShallowReactive
     // HelloWorld
   },
   setup() {
@@ -47,7 +53,6 @@ export default {
     let cancel;
     watchEffect((onInvalidate) => {
       onInvalidate(() => {
-        console.log('onInvalidate')
         cancel && cancel()
       })
       const p = getCommits(masters[master.value]);
@@ -63,15 +68,25 @@ export default {
     // onMounted(() => {
     //   console.log(setUpEl.value)
     // })
-    watchEffect(() => {
-      console.log(setUpEl.value)
-    })
+    // watchEffect(() => {
+    //   console.log(setUpEl.value)
+    // })
+
+    // const refProxy = ref(0);
+    // const reactiveProxy = reactive({});
+    // const readonlyProxy = readonly({});
+    // console.log('refProxy', isProxy(refProxy));
+    // console.log('reactiveProxy', isProxy(reactiveProxy));
+    // console.log('readonlyProxy', isProxy(readonlyProxy));
     return {
       setUpEl,
       master,
       masters,
       checkMaster,
-      commits
+      commits,
+      // refProxy,
+      // reactiveProxy,
+      // readonlyProxy
     }
   },
   
