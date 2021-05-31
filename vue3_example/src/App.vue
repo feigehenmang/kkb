@@ -1,6 +1,8 @@
 <template>
   <div>
-    <watch></watch>
+    <Input @focus="handleFocus" v-model="text" v-model:title.uppcase="title" />
+    {{text}}
+    <!-- <watch></watch> -->
     <span style="padding: 10px;" v-for="(master, index) in masters" :key="master" @click="checkMaster(index)">{{master}}</span>
     <p>{{master}}</p>
      <ul>
@@ -12,7 +14,7 @@
         </li>
       </ul>
   </div>
-  <shallow-readonly></shallow-readonly>
+  <!-- <shallow-readonly></shallow-readonly> -->
   <!-- <shallow-reactive></shallow-reactive> -->
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
   <!-- <setup ref="setUpEl"></setup>
@@ -25,20 +27,22 @@
 // import Setup from './components/setup.vue'
 // import lifeCycle from './components/lifeCycle.vue'
 // import Provide from './components/Provide.vue'
-import Watch from './components/Watch.vue'
+// import Watch from './components/Watch.vue'
 import { /*onMounted,isProxy, reactive, readonly,*/  ref, watchEffect } from 'vue'
 // import HelloWorld from './components/HelloWorld.vue'
 import { getCommits } from './apis/'
-import ShallowReadonly from './components/ShallowReadonly.vue'
+// import ShallowReadonly from './components/ShallowReadonly.vue'
 // import ShallowReactive from './components/ShallowReactive.vue'
+import Input from './components/Input.vue'
 export default {
   name: 'App',
   components: {
+    Input
     // Setup,
     // lifeCycle,
     // Provide,
-    Watch,
-    ShallowReadonly,
+    // Watch,
+    // ShallowReadonly,
     // ShallowReactive
     // HelloWorld
   },
@@ -65,6 +69,10 @@ export default {
       cancel = p.cancel;
       
     })
+
+
+    const text = ref('');
+    const title = ref('');
     // onMounted(() => {
     //   console.log(setUpEl.value)
     // })
@@ -84,11 +92,19 @@ export default {
       masters,
       checkMaster,
       commits,
+      text,
+      title
       // refProxy,
       // reactiveProxy,
       // readonlyProxy
     }
   },
+
+  methods: {
+    handleFocus(ev) {
+      console.log('handleFocus', ev)
+    }
+  }
   
 }
 </script>
